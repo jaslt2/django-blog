@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <!---start-content-->
+    <div class="content">
+        <div class="wrap">
+        <div class="single-page">
+            <div class="single-page-artical">
+                <div class="artical-content">
+                    {% if post.published_date %}
+                    <div class="date">
+                        {{ post.published_date }}
+                    </div>
+                    {% endif %}
+                    <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"><span></a>
+                    <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <img src="/blog/{{ MEDIA_URL }}{{ post.main_image }}">
+                    <h3><a href="#">{{ post.title }}</a></h3>
+                        <p>{{ post.text|linebreaksbr }}</p> 
+                </div>              
+                <div class="clear"> </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

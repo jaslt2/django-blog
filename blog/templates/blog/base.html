@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>The Adventures of Blur Jo and Shaun the Sheep</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link href="{% static 'blog/css/style.css' %}" rel='stylesheet' type='text/css' />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'blog/images/fav_icon.png' %}" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        </script>
+        <!--webfonts-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <!--//webfonts-->
+        <!-- Global CSS for the page and tiles -->
+        <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+        <!-- //Global CSS for the page and tiles -->
+        <!---start-click-drop-down-menu-->
+        <script src="{% static 'blog/js/jquery.min.js' %}"></script>
+        <script src="{% static 'blog/js/parallax.min.js' %}"></script>
+        <script>
+        $(function(){
+            if (navigator.userAgent.match(/(iPod|iPhone|iPad|Android)/)) {
+              $('.parallax-container').height( $(window).height() * 0.5 | 0 );
+            } else {
+              $(window).resize(function(){
+                var parallaxHeight = Math.max($(window).height() * 0.7, 200) | 0;
+                $('.parallax-container').height(parallaxHeight);
+              }).trigger('resize');
+            }
+          });
+        jQuery(window).trigger('resize').trigger('scroll');
+        </script>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
