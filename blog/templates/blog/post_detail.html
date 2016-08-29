@@ -11,12 +11,13 @@
                     <div class="date">
                         {{ post.published_date }}
                     </div>
+                    {% else %}
+                        <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
                     {% endif %}
                     <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"><span></a>
                     <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
                     <img src="/blog{{ MEDIA_URL }}{{ post.main_image }}">
                     <h3><a href="#">{{ post.title }}</a></h3>
-{#                        {{ post.text|linebreaksbr }}#}
                     {% autoescape off %}{{ post.text|linebreaksbr }}{% endautoescape %}
                 </div>              
                 <div class="clear"> </div>

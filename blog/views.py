@@ -2,7 +2,6 @@ import logging
 
 from django.forms import modelformset_factory, inlineformset_factory
 from django.shortcuts import render,get_object_or_404,redirect
-from django.utils import timezone
 
 from .models import Post, PostForm, ImageModel, ImageForm
 
@@ -28,9 +27,7 @@ def post_new(request):
         formset = ImageFormSet(request.POST, request.FILES)
         if form.is_valid() and formset.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
+            post.save_draft(request)
             for image_form in formset.cleaned_data:
                 if image_form:
                     image = image_form['image']
@@ -51,15 +48,18 @@ def post_edit(request, pk):
         formset = ImageFormSet(request.POST, request.FILES, instance=post)
         if form.is_valid() and formset.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
+            post.save_draft(request)
             formset.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
         formset = ImageFormSet(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form, 'formset': formset})
+
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish(request)
+    return redirect('index', pk=pk)
 
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)

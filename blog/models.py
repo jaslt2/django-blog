@@ -21,7 +21,14 @@ class Post(models.Model):
 
     objects = PostQuerySet.as_manager()
 
-    def publish(self):
+    def save_draft(self, request):
+        self.author=request.user
+        self.live=False
+        self.save()
+
+    def publish(self, request):
+        self.author=request.user
+        self.live=True
         self.published_date = timezone.now()
         self.save()
 
@@ -41,7 +48,7 @@ class Category(models.Model):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'text', 'category', 'main_image', 'live')
+        fields = ('title', 'text', 'category', 'main_image')
 
 class ImageForm(forms.ModelForm):
     class Meta:
