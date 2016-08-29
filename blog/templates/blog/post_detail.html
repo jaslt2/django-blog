@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <!---start-content-->
+    <a href="{% url 'index' %}" class="top-menu"><span class="glyphicon glyphicon-home"></span></a>
     <div class="content">
         <div class="wrap">
         <div class="single-page">
@@ -14,9 +14,10 @@
                     {% endif %}
                     <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"><span></a>
                     <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                    <img src="/blog/{{ MEDIA_URL }}{{ post.main_image }}">
+                    <img src="/blog{{ MEDIA_URL }}{{ post.main_image }}">
                     <h3><a href="#">{{ post.title }}</a></h3>
-                        <p>{{ post.text|linebreaksbr }}</p> 
+{#                        {{ post.text|linebreaksbr }}#}
+                    {% autoescape off %}{{ post.text|linebreaksbr }}{% endautoescape %}
                 </div>              
                 <div class="clear"> </div>
             </div>

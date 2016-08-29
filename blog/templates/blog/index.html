@@ -18,12 +18,12 @@
                         <!-- These are our grid blocks -->
                         {% for post in posts %}
                             <li onclick="location.href='{% url 'post_detail' post.pk %}';">
-                                <img src="/blog{{ MEDIA_URL }}{{ post.image }}">
+                                <img src="/blog{{ MEDIA_URL }}{{ post.main_image }}">
                                 <div class="post-info">
                                     <div class="post-basic-info">
                                         <h3><a href="#">{{ post.title }}</a></h3>
                                         <span><a href="#"><label> </label>{{ post.category }}</a></span>
-                                        <p>{{ post.text }}</p>
+                                        <p>{{ post.author }}</p>
                                     </div>
                                 </div>
                             </li>

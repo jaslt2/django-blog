@@ -9,9 +9,6 @@ class PostQuerySet(models.QuerySet):
     def myDrafts(self, request):
         return self.filter(live=False, author=request.user)
 
-class ImageModel(models.Model):
-    image = models.ImageField(upload_to='images/%Y/%m/%d')
-
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -20,7 +17,6 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     live = models.BooleanField()
     main_image = models.ImageField(upload_to='images/%Y/%m/%d', null=True)
-    images = models.ManyToManyField(ImageModel)
     category = models.ForeignKey('blog.Category');
 
     objects = PostQuerySet.as_manager()
@@ -32,6 +28,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class ImageModel(models.Model):
+    image = models.ImageField(upload_to='images/%Y/%m/%d', null=True, blank=True)
+    post = models.ForeignKey(Post, default=None)
+
 class Category(models.Model):
     def __str__(self):
         return self.title
@@ -41,5 +41,9 @@ class Category(models.Model):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'text', 'category', 'main_image', 'live', 'images')
+        fields = ('title', 'text', 'category', 'main_image', 'live')
 
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = ImageModel
+        fields = ('image' ,)

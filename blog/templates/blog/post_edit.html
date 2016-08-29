@@ -1,9 +1,13 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+    <a href="{% url 'index' %}" class="top-menu"><span class="glyphicon glyphicon-home"></span></a>
     <h1>New post</h1>
+    <p>To add an image, use html tags. For example: " &lt img src='/blog/media/images/2016/08/28/DSC02709.JPG'/&gt"</p>
     <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
         {{ form.as_p }}
+        {{ formset.management_form }}
+        {{ formset.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}
