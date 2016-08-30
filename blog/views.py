@@ -59,7 +59,7 @@ def post_edit(request, pk):
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish(request)
-    return redirect('index', pk=pk)
+    return redirect('index')
 
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)

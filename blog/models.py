@@ -16,7 +16,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     live = models.BooleanField()
-    main_image = models.ImageField(upload_to='images/%Y/%m/%d', null=True)
+    main_image = models.ImageField(upload_to='images/%Y/%m/%d', null=True, blank=True)
     category = models.ForeignKey('blog.Category');
 
     objects = PostQuerySet.as_manager()

@@ -18,7 +18,11 @@
                         <!-- These are our grid blocks -->
                         {% for post in posts %}
                             <li onclick="location.href='{% url 'post_detail' post.pk %}';">
-                                <img src="/blog{{ MEDIA_URL }}{{ post.main_image }}">
+                                {% if post.main_image %}
+                                    <img src="/blog{{ MEDIA_URL }}{{ post.main_image }}">
+                                {%  else %}
+                                    <img src="{% static 'blog/images/default_blog_thumbnail.png' %}" />
+                                {%  endif %}
                                 <div class="post-info">
                                     <div class="post-basic-info">
                                         <h3><a href="#">{{ post.title }}</a></h3>
