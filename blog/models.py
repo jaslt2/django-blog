@@ -7,7 +7,10 @@ class PostQuerySet(models.QuerySet):
         return self.filter(live=True)
 
     def myDrafts(self, request):
-        return self.filter(live=False, author=request.user)
+        # if request.user.is_authenticated():
+        #     return self.filter(live=False, author=request.user)
+        # else:
+            return None
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
