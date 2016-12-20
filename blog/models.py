@@ -7,9 +7,9 @@ class PostQuerySet(models.QuerySet):
         return self.filter(live=True)
 
     def myDrafts(self, request):
-        # if request.user.is_authenticated():
-        #     return self.filter(live=False, author=request.user)
-        # else:
+        if request.user.is_authenticated():
+            return self.filter(live=False, author=request.user)
+        else:
             return None
 
 class Post(models.Model):
@@ -21,6 +21,7 @@ class Post(models.Model):
     live = models.BooleanField()
     main_image = models.ImageField(upload_to='images/%Y/%m/%d', null=True, blank=True)
     category = models.ForeignKey('blog.Category');
+    theme = models.ForeignKey('blog.Theme', blank=True, null=True);
 
     objects = PostQuerySet.as_manager()
 
@@ -35,6 +36,9 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
+    def isWinterTheme(self):
+        return self.theme.title.lower() == 'Winter'.lower()
+
     def __str__(self):
         return self.title
 
@@ -48,10 +52,16 @@ class Category(models.Model):
 
     title = models.CharField(max_length=200, default=0)
 
+class Theme(models.Model):
+    def __str__(self):
+        return self.title
+
+    title = models.CharField(max_length=200, default=0)
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'text', 'category', 'main_image')
+        fields = ('title', 'text', 'category', 'main_image', 'theme')
 
 class ImageForm(forms.ModelForm):
     class Meta:

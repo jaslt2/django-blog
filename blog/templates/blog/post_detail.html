@@ -1,10 +1,12 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <script>
-        $(document).ready( function(){
-            $.fn.snow();
-        });
-    </script>
+    {% if post.isWinterTheme %}
+        <script>
+            $(document).ready( function(){
+                $.fn.snow();
+            });
+        </script>
+    {% endif %}
     <a href="{% url 'index' %}" class="top-menu"><span class="glyphicon glyphicon-home"></span></a>
     <div class="content">
         <div class="wrap">
