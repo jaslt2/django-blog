@@ -1,6 +1,10 @@
 {% extends 'blog/base.html' %}
-
 {% block content %}
+    <script>
+        $(document).ready( function(){
+            $.fn.snow();
+        });
+    </script>
     <a href="{% url 'index' %}" class="top-menu"><span class="glyphicon glyphicon-home"></span></a>
     <div class="content">
         <div class="wrap">
@@ -19,7 +23,7 @@
                     {% if post.main_image %}
                         <img src="/blog{{ MEDIA_URL }}{{ post.main_image }}">
                     {% endif %}
-                    <h3><a href="#">{{ post.title }}</a></h3>
+                    <h3>{{ post.title }}</h3>
                     {% autoescape off %}{{ post.text|linebreaksbr }}{% endautoescape %}
                 </div>              
                 <div class="clear"> </div>
