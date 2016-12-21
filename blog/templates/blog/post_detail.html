@@ -6,6 +6,12 @@
                 $.fn.snow();
             });
         </script>
+    {% elif post.isAutumnTheme %}
+    <script type="text/javascript">
+        $(document).ready( function(){
+                $.fn.autumn();
+            });
+    </script>
     {% endif %}
     <a href="{% url 'index' %}" class="top-menu"><span class="glyphicon glyphicon-home"></span></a>
     <div class="content">

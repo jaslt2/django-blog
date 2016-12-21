@@ -37,7 +37,10 @@ class Post(models.Model):
         self.save()
 
     def isWinterTheme(self):
-        return self.theme.title.lower() == 'Winter'.lower()
+        return self.theme is not None && self.theme.title.lower() == 'Winter'.lower()
+
+    def isAutumnTheme(self):
+        return self.theme is not None && self.theme.title.lower() == 'Autumn'.lower()
 
     def __str__(self):
         return self.title
