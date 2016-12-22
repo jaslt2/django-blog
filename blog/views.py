@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 
 def index(request):
 	context = {
-        'posts': Post.objects.published(),
-        'drafts': Post.objects.myDrafts(request)
+        'posts': Post.objects.published().order_by('published_date'),
+        'drafts': Post.objects.myDrafts(request).order_by('created_date')
     }
 	return render(request, 'blog/index.html', context)
 
