@@ -12,10 +12,10 @@
              <div id="main" role="main">
                 <!-- Add a new post -->
                  <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-                 <!-- Existing posts -->
+                 <!-- Existing posts, this displays the blog posts as a set of tiles -->
                  {% if posts %}
                     <ul id="tiles">
-                        <!-- These are our grid blocks -->
+                        <!-- These are our grid blocks, put hover feature here with flashy stuff-->
                         {% for post in posts %}
                             <li onclick="location.href='{% url 'post_detail' post.pk %}';">
                                 {% if post.main_image %}
